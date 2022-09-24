@@ -1,0 +1,41 @@
+---
+
+- name: Prepare and download cluster 
+  hosts: k3s_cluster
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: k3s/prereq
+    - role: k3s/download
+    - role: k3s/raspberrypi
+
+- name: Install and configure masters
+  hosts: master
+  become: yes
+  roles:
+    - role: k3s/master
+
+- name: Install and configure nodes
+  hosts: node
+  become: yes
+  roles:
+    - role: k3s/node
+
+- name: Enable traefik dashboard
+  hosts: k3s_exec
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: traefik-dash/apply
+      when: traefik_dash_enabled
+
+- name: Install and configure MetalLB
+  hosts: k3s_exec
+  become: yes
+  roles:
+    - role: metallb/prereq
+      when: metallb_enable
+    - role: metallb/apply
+      when: metallb_enable
+    - role: metallb/configure
+      when: metallb_enable

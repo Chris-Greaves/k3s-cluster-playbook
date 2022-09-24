@@ -1,0 +1,19 @@
+---
+# K3s
+k3s_version: v1.22.3+k3s1
+ansible_user: debian
+systemd_dir: /etc/systemd/system
+master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"
+extra_server_args: "" # If using MetalLB then add --disable servicelb
+extra_agent_args: ""
+
+# Traefik Dashboard
+traefik_dash_enabled: true
+ingress_host: traefik.local
+
+# MetalLB
+metallb_enable: false
+metallb_version: v0.13.5
+ip_address_pool: 192.168.1.240-192.168.1.250
+address_pool_name: default
+advertisement_name: default

@@ -1,0 +1,16 @@
+---
+
+# - name: Create service
+#   kubernetes.core.k8s:
+#     state: present
+#     src: traefik_dashboard_service.yml
+
+- name: Create service
+  kubernetes.core.k8s:
+    state: present
+    template: traefik_dashboard_service.yml.j2
+
+- name: Create Ingress
+  kubernetes.core.k8s:
+    state: present
+    template: traefik_dashboard_ingress.yml.j2
