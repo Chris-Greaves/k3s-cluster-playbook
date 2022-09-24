@@ -27,10 +27,17 @@ Second, edit `inventory/my-cluster/hosts.ini` to match the system information ga
 
 ```bash
 [master]
-192.16.35.12
+192.168.1.26
 
 [node]
-192.16.35.[10:11]
+192.168.1.34
+192.168.1.39
+192.168.1.16
+192.168.1.32
+
+# Group of 1 machine that will run the kubectl commands for helm deployments, etc.
+[k3s_exec]
+192.168.1.172
 
 [k3s_cluster:children]
 master
@@ -50,5 +57,5 @@ ansible-playbook site.yml -i inventory/my-cluster/hosts.ini
 To get access to your **Kubernetes** cluster just
 
 ```bash
-scp debian@master_ip:~/.kube/config ~/.kube/config
+scp username@master_ip:~/.kube/config ~/.kube/config
 ```
