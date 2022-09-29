@@ -1,0 +1,13 @@
+---
+
+- name: Install and configure masters
+  hosts: master
+  become: yes
+  roles:
+    - role: k3s/master
+
+- name: Install and configure nodes
+  hosts: node
+  become: yes
+  roles:
+    - role: k3s/node
