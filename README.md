@@ -37,7 +37,7 @@ Second, edit `inventory/my-cluster/hosts.ini` to match the system information ga
 
 # Group of 1 machine that will run the kubectl commands for helm deployments, etc.
 [k3s_exec]
-192.168.1.172
+192.168.1.26
 
 [k3s_cluster:children]
 master
