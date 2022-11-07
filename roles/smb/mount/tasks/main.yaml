@@ -1,0 +1,22 @@
+---
+
+- name: utility present
+  package:
+    name: cifs-utils
+    state: present
+
+- name: check mountpoint exist
+  file:
+    path: "{{ smb_mount_point }}"
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Mount network share
+  ansible.posix.mount:
+    src: "{{ smb_uri }}"
+    path: "{{ smb_mount_point }}"
+    fstype: cifs
+    opts: 'username={{ smb_username }},password={{ smb_password }}'
+    state: mounted
