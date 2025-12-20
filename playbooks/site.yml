@@ -1,0 +1,3 @@
+---
+- name: Setup the K3s Cluster
+  ansible.builtin.import_playbook: k3s.orchestration.site
