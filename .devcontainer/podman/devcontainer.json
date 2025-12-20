@@ -1,0 +1,32 @@
+{
+  "containerUser": "root",
+  "customizations": {
+    "vscode": {
+      "extensions": ["redhat.ansible"]
+    }
+  },
+  "image": "ghcr.io/ansible/community-ansible-dev-tools:latest",
+  "name": "ansible-dev-container-podman",
+  "runArgs": [
+    "--cap-add=CAP_MKNOD",
+    "--cap-add=NET_ADMIN",
+    "--cap-add=SYS_ADMIN",
+    "--cap-add=SYS_RESOURCE",
+    "--device",
+    "/dev/fuse",
+    "--security-opt",
+    "seccomp=unconfined",
+    "--security-opt",
+    "label=disable",
+    "--security-opt",
+    "apparmor=unconfined",
+    "--security-opt",
+    "unmask=/sys/fs/cgroup",
+    "--userns=host",
+    "--hostname=ansible-dev-container"
+  ],
+  "remoteUser": "root",
+  "mounts": [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/root/.ssh-host,type=bind,consistency=cached,readonly"
+  ]
+}

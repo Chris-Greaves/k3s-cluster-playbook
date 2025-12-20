@@ -1,0 +1,21 @@
+{
+  "containerUser": "root",
+  "customizations": {
+    "vscode": {
+      "extensions": ["redhat.ansible"]
+    }
+  },
+  "image": "ghcr.io/ansible/community-ansible-dev-tools:latest",
+  "name": "ansible-dev-container-docker",
+  "runArgs": [
+    "--privileged",
+    "--device",
+    "/dev/fuse",
+    "--hostname=ansible-dev-container"
+  ],
+  "remoteUser": "root",
+  "mounts": [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/root/.ssh-host,type=bind,consistency=cached,readonly"
+  ],
+  "updateRemoteUserUID": true
+}
