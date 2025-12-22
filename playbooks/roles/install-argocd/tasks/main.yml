@@ -1,0 +1,27 @@
+---
+- name: Add Argo CD Helm repo
+  kubernetes.core.helm_repository:
+    name: argo
+    url: https://argoproj.github.io/argo-helm
+
+- name: Deploy Argo CD chart with values loaded from template
+  kubernetes.core.helm:
+    name: argocd
+    chart_ref: argo/argo-cd
+    chart_version: "{{ argocd_helm_chart_version }}"
+    release_namespace: "{{ argocd_namespace }}"
+    create_namespace: true
+    values: "{{ lookup('template', 'argo_cd_values.yml.j2') | from_yaml }}"
+
+# - name: Wait for Argo CD to be available
+#   wait_for:
+#     host: localhost
+#     port: 8080
+#     timeout: 300
+#     state: "started"
+
+# - name: Verify Argo CD is running
+#   uri:
+#     url: http://localhost:8080/
+#     return_content: yes
+#     status_code: 200

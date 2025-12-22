@@ -9,12 +9,14 @@ k3s_cluster:
         192.16.35.12:
         192.16.35.13:
 
-  # Required Vars
   vars:
+    # Required Vars
     ansible_port: 22
     # If your hosts use a different user, change the below variable to the user name.
     # This username will be used for each host, so you might need to set this prior to running.
     ansible_user: debian
+
+    # K3s Vars
     k3s_version: v1.31.12+k3s1
     # The token should be a random string of reasonable length. You can generate
     # one with the following commands:
@@ -25,7 +27,7 @@ k3s_cluster:
     token: "changeme!"
     api_endpoint: "{{ hostvars[groups['server'][0]]['ansible_host'] | default(groups['server'][0]) }}"
 
-    # Optional vars
+    # Optional K3s Vars
     # extra_server_args: ""
     # extra_agent_args: ""
     # extra_install_envs: { 'INSTALL_K3S_SKIP_SELINUX_RPM': 'true' }
@@ -53,3 +55,9 @@ k3s_cluster:
     #   Containerd can be configured to connect to private registries and use them to pull images as needed by the kubelet.
     #   YAML here will be placed as the content of /etc/rancher/k3s/registries.yaml
     #   See https://docs.k3s.io/installation/private-registry
+
+    # ArgoCD Vars
+    argocd_deploy: true
+    argocd_namespace: argocd
+    argocd_helm_chart_version: 9.1.9
+    argocd_domain: argocd.example.com

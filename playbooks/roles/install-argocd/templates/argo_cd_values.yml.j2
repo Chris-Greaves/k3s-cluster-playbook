@@ -1,0 +1,27 @@
+global:
+  domain: {{ argocd_domain }}
+
+redis-ha:
+  enabled: true
+
+controller:
+  replicas: 1
+
+server:
+  replicas: 2
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    tls: false
+
+configs:
+  params:
+    server.insecure: true
+
+repoServer:
+  replicas: 2
+
+applicationSet:
+  replicas: 2
+
+
