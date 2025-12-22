@@ -1,0 +1,6 @@
+---
+- name: Install Helm
+  hosts: server
+  become: true
+  roles:
+    - role: install-helm
