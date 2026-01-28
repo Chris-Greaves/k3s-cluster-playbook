@@ -1,0 +1,8 @@
+---
+- name: Deploy Bitnami's latest Keycloak chart from OCI registry
+  kubernetes.core.helm:
+    name: keycloak
+    chart_ref: "oci://registry-1.docker.io/bitnamicharts/keycloak"
+    release_namespace: identity
+    create_namespace: true
+    values: "{{ lookup('template', 'keycloak_values.yml.j2') | from_yaml }}"

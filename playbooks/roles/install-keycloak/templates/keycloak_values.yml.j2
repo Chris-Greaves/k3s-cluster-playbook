@@ -1,0 +1,32 @@
+global:
+  security:
+    allowInsecureImages: true
+image:
+  repository: "bitnamilegacy/keycloak"
+postgresql:
+  image:
+    repository: "bitnamilegacy/postgresql"
+
+ingress:
+  enabled: true
+  hostname: "keycloak.local"
+  tls: false
+
+readinessProbe:
+  initialDelaySeconds: 120
+  timeoutSeconds: 5
+
+livenessProbe:
+  initialDelaySeconds: 320
+
+resources:
+  requests:
+    cpu: 2
+    memory: 512Mi
+  limits:
+    cpu: 3
+    memory: 1024Mi
+
+adminRealm: "master"
+
+httpEnabled: true

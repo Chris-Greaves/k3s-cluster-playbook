@@ -1,0 +1,6 @@
+---
+- name: Install Keycloak with Helm
+  hosts: server
+  become: false
+  roles:
+    - role: install-keycloak
