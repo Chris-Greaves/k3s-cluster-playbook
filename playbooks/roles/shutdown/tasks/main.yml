@@ -1,0 +1,4 @@
+---
+- name: Power off the server
+  community.general.shutdown:
+    msg: "Shut down initiated by Ansible"
