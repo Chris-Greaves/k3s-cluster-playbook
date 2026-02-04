@@ -1,0 +1,4 @@
+---
+- name: Restart the server
+  ansible.builtin.reboot:
+    msg: "Restart initiated by Ansible"

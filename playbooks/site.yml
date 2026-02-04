@@ -1,15 +1,30 @@
 ---
+- name: Identify Primary Server
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Add primary server to dedicated group
+      ansible.builtin.add_host:
+        name: "{{ groups['server'][0] }}"
+        groups: primary_server
+
 - name: Setup the K3s Cluster
   ansible.builtin.import_playbook: k3s.orchestration.site
 
 - name: Install Helm
-  hosts: server
+  hosts: primary_server
   become: true
   roles:
     - role: install-helm
 
 - name: Install Argo CD with Helm
-  hosts: server
+  hosts: primary_server
   become: false
   roles:
     - role: install-argocd
+
+- name: Install Keycloak with Helm
+  hosts: primary_server
+  become: false
+  roles:
+    - role: install-keycloak

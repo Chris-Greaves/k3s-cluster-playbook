@@ -1,7 +1,7 @@
 ---
-- name: Shutdown all hosts
+- name: Update all hosts
   hosts: all
   become: true
   gather_facts: false
   roles:
-    - role: host.shutdown
+    - role: host.update

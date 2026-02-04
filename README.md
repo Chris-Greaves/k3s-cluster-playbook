@@ -21,6 +21,7 @@ This playbook is built using some community projects as well as some created by 
 When the Dev Container starts, it'll create a readonly mount of your .ssh directory to the `~/.ssh-host` folder, which will allow you to copy the files you need from that folder to `~/.ssh`. This copy of the files means you can tweak the permissions of the files to please the very particular ssh requirements.
 
 ```bash
+cp ~/.ssh-host/known_hosts ~/.ssh/known_hosts
 cp ~/.ssh-host/id_rsa ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 ```
@@ -87,3 +88,11 @@ To get access to your **Kubernetes** cluster just
 ```bash
 scp username@master_ip:~/.kube/config ~/.kube/config
 ```
+
+For windows use:
+
+```powershell
+scp username@master_ip:~/.kube/config $HOME/.kube/config
+```
+
+The Kubeconfig you just downloaded was for local use, so you'll need to edit the config and swap `127.0.0.1` with the IP of one of the servers.
