@@ -24,6 +24,14 @@ When the Dev Container starts, it'll create a readonly mount of your .ssh direct
 cp ~/.ssh-host/known_hosts ~/.ssh/known_hosts
 cp ~/.ssh-host/id_rsa ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
+# or
+just copy-hosts
+```
+
+**OPTIONAL:** If you want to use the just recipies, then you'll need to install it in your container using the following command:
+
+```bash
+dnf install just
 ```
 
 ### Setup the playbook
@@ -73,12 +81,16 @@ Pull the requirements down.
 
 ```bash
 ansible-galaxy install -r ./collections/requirements.yml
+# or
+just install
 ```
 
 Start provisioning of the cluster using the following command:
 
 ```bash
-ansible-playbook playbooks/site.yml -i inventory/pi-and-clusterd/inventory.yml
+ansible-playbook playbooks/site.yml -i inventory/my_cluster/inventory.yml
+# or
+just run my_cluster shutdown
 ```
 
 ## Kubeconfig
